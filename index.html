@@ -51,6 +51,14 @@
 		
 			<form id="info-form">
 				
+				<div class="form-logo">
+					<label id="logo-label" for="nameField">Logo</label>
+					<select id="logoField" name="logos">
+						<option value="arrow">Green arrow</option>
+						<option value="glg">GLG square</option>
+					</select>
+				</div>
+				
 				<div class="form-name">
 					<label id="name-label" for="nameField">Name</label>
 					<input id="nameField" type="text" maxlength="100" placeholder="First and last"></input>
@@ -90,7 +98,7 @@
 					<td class="name-block" style="vertical-align: top;">
 						<p style="margin: 0; line-height: 1.4;"><span id="signatureName">Firstname Lastname</span></p>
 						
-							<p style="margin: 0; line-height: 1.4;">PO Box 485<br />Omaha, Nebraska 68102</p>
+							<p style="margin: 0; line-height: 1.4;">2027 Dodge Street, Suite 204<br />Omaha, Nebraska 68102</p>
 							  <p style="margin: 0; line-height: 1.4;"><span id="signaturePhone1">555-555-5555</span> | <a href="https://glg.law" target="_blank" style="color: inherit;">glg.law</a></p>
 					</td>
 				</tr>
@@ -120,7 +128,7 @@
   </body>
   
   <script>
-	  
+    	var personLogo = document.getElementById('signatureLogo');
 		var personName = document.getElementById('signatureName');
 		var personPhones = document.getElementById('signaturePhoneNumbers');
 		var personPhone1 = document.getElementById('signaturePhone1');
@@ -128,16 +136,31 @@
 		var codeOutput = document.getElementById('code-output');
 	  
 	  function getUserInfo() {
+		  var logoField = document.getElementById('logoField').value;
 		  var nameField = document.getElementById('nameField').value;
 		  var phone1Field = document.getElementById('phone1Field').value;
 		  
 		  var result = document.getElementById('result');
 		  
+		  var arrow_logo = 'https://images.squarespace-cdn.com/content/67a133638f24af00b190e546/3387bc26-8a75-4bf8-ae73-434974665275/glg-arrow-green.png';
+			
+			var glg_logo = 'https://images.squarespace-cdn.com/content/67a133638f24af00b190e546/625ebdd7-de68-4ec4-931e-f3cfcb878cc4/glg-square-blue-white.png';
+		  
+				
+			function getLogo() {
+				if (logoField == "arrow") { 
+					personLogo.innerHTML = "<a href='https://www.glg.law' target='_blank' style='color:inherit;'><img src='" + arrow_logo + "' width='50' /></a>";
+				};
+				if (logoField == "glg") { 
+					personLogo.innerHTML = "<a href='https://www.glg.law' target='_blank' style='color:inherit;'><img src='" + glg_logo + "' width='60' /></a>";
+				};
+			}
+		  
 		  
 		  if (nameField.length < 3) {
 			  result.innerHTML = 'Name field must contain at least 3 characters';
 		  } else {
-			 
+			 if (personLogo) { getLogo(logoField); };
 			 if (nameField) { personName.innerHTML = nameField; };
 			 personPhone1.innerHTML = phone1Field;			
 						  
