@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!-- ClipboardJS for the copy code functionality -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+	
+	<style>
+		
+		body {  }
+		
+		div.topper { border-bottom: 1px solid #eee; margin: 30px; font-family: sans-serif; }
+		div.topper ol { color: #777; line-height: 1.5; font-size: 80%; }
+		div.signature-generator { display: flex; flex-wrap: wrap; column-gap: 30px; margin: 0 30px;}
+		
+		div.inputs { font-family: sans-serif; padding: 40px; background: #f2f2f2; flex-grow: 1; font-size: 13px; margin-bottom: 30px; }
+		div.output { flex-grow: 7; margin-bottom: 30px; }
+		div#signature-code { background: #fff; border: 5px solid #000; padding: 40px; margin-bottom: 30px; }
+		
+		form div { margin-bottom: 10px; display: flex;}
+		form div label { width: 100px; }
+
+		div#code-output { margin-top: 40px; font-family: ui-monospace, monospace; border: 2px solid #ccc; padding: 20px; font-size: 12px; display: none; }
+						
+		/* p#signatureSocial > *:not(:last-child)::after, p#signaturePhoneNumbers > *:not(:last-child)::after  { content: " / ";} */
+		
+		
+	</style>
+
+</head>
+
+<body>
+	<div class="topper">
+		
+		<h1>GLG signature generator</h1>
+		
+		<ol>
+			<li>Adjust the settings using the fields on the left side</li>
+			<li>Click Submit to see updated signature changes</li>
+			<li>Copy signature to clipboard</li>
+			<li>Create a new signature in Gmail and paste in the copied signature</li>
+		</ol>
+	</div>
+	
+	<div class="signature-generator">
+		
+		<div class="inputs">
+		
+			<form id="info-form">
+				
+				<div class="form-name">
+					<label id="name-label" for="nameField">Name</label>
+					<input id="nameField" type="text" maxlength="100" placeholder="First and last"></input>
+				</div>
+	
+				<div class="form-phone1">
+					<label id="phone1-label" for="phone1Field">Phone number</label>
+					<input id="phone1Field" type="text" maxlength="100"></input>
+				</div>
+				
+				
+				
+				<div class='form-sub'>
+					<button id='subButton' type='button'>Submit</button>
+				</div>
+	
+			</form>
+
+			<div>
+				<p id='result'></p>
+			</div>
+
+	</div><!-- end inputs -->
+
+	<div class="output">
+
+	<!-- -------------------- START email signature -------------------- -->
+	
+	<div id="signature-code">
+	<div class="signature" id="email-signature" style="margin: 30px 0; width: 100%;">
+		<table style="margin: 25px 0 15px;padding: 25px 0 25px; width: 100%; font-size: 10.5pt; font-family: 'Century Schoolbook',serif;line-height: 1.2;">
+			<tbody>
+				<tr>
+					<td class="logo" id="signatureLogo" style="width: 70px; vertical-align: top;">
+						<a href="https://glg.law" target="_blank" style="color: inherit;"><img src="https://images.squarespace-cdn.com/content/67a133638f24af00b190e546/3387bc26-8a75-4bf8-ae73-434974665275/glg-arrow-green.png" width="50" style="display: block; max-width: 50px;" /></a>
+					</td>
+					<td class="name-block" style="vertical-align: top;">
+						<p style="margin: 0; line-height: 1.4;"><span id="signatureName">Firstname Lastname</span></p>
+						
+							<p style="margin: 0; line-height: 1.4;">PO Box 485<br />Omaha, Nebraska 68102</p>
+							  <p style="margin: 0; line-height: 1.4;"><span id="signaturePhone1">555-555-5555</span> | <a href="https://glg.law" target="_blank" style="color: inherit;">glg.law</a></p>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+	
+	</div>
+	
+	<!-- -------------------- END email signature -------------------- -->
+
+	<button class="btn" data-clipboard-target="#email-signature">
+		Copy to clipboard
+	</button>
+	
+	</div><!-- end output div -->
+	
+
+	</div><!-- end signature-generator -->
+	
+	<div id="code-output">
+		<pre style="color: #aaa;">When finished, copy code from here into the signature settings in your email program.</pre>
+	</div>
+
+  </body>
+  
+  <script>
+	  
+		var personName = document.getElementById('signatureName');
+		var personPhones = document.getElementById('signaturePhoneNumbers');
+		var personPhone1 = document.getElementById('signaturePhone1');
+		
+		var codeOutput = document.getElementById('code-output');
+	  
+	  function getUserInfo() {
+		  var nameField = document.getElementById('nameField').value;
+		  var phone1Field = document.getElementById('phone1Field').value;
+		  
+		  var result = document.getElementById('result');
+		  
+		  
+		  if (nameField.length < 3) {
+			  result.innerHTML = 'Name field must contain at least 3 characters';
+		  } else {
+			 
+			 if (nameField) { personName.innerHTML = nameField; };
+			 personPhone1.innerHTML = phone1Field;			
+						  
+		  }
+	  } // getUserInfo
+	  
+			
+		function printDiv() {
+			var divContents = document.getElementById("signature-code").innerHTML;
+			codeOutput.innerText = divContents;
+		}	  
+
+	  
+	  var subButton = document.getElementById('subButton');
+	  subButton.addEventListener('click', getUserInfo, false); 
+	  subButton.addEventListener('click', printDiv, false); 
+	  
+
+	  
+  </script>
+  
+  <script>
+	  new ClipboardJS('.btn');
+  </script>
+  
+</html>
