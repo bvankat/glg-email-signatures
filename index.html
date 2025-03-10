@@ -64,6 +64,11 @@
 					<input id="nameField" type="text" maxlength="100" placeholder="First and last"></input>
 				</div>
 	
+				<div class="form-line2">
+					<label id="line2-label" for="phone1Field">Second line</label>
+					<input id="line2Field" type="text" maxlength="100"></input>
+				</div>
+				
 				<div class="form-phone1">
 					<label id="phone1-label" for="phone1Field">Phone number</label>
 					<input id="phone1Field" type="text" maxlength="100"></input>
@@ -89,17 +94,22 @@
 	
 	<div id="signature-code">
 	<div class="signature" id="email-signature" style="margin: 30px 0; width: 100%;">
-		<table style="margin: 25px 0 15px;padding: 25px 0 25px; width: 100%; font-size: 10.5pt; font-family: 'Century Schoolbook',serif;line-height: 1.2;">
+		<table style="margin: 25px 0 15px;padding: 25px 0 25px; width: 100%; font-size: 10.5pt; font-family: 'Century Schoolbook', serif; line-height: 1.5;">
 			<tbody>
 				<tr>
 					<td class="logo" id="signatureLogo" style="width: 70px; vertical-align: top;">
-						<a href="https://glg.law" target="_blank" style="color: inherit;"><img src="https://images.squarespace-cdn.com/content/67a133638f24af00b190e546/3387bc26-8a75-4bf8-ae73-434974665275/glg-arrow-green.png" width="50" style="display: block; max-width: 50px;" /></a>
+						<a href="https://glg.law" target="_blank" style="color: inherit;"><img src="https://images.squarespace-cdn.com/content/67a133638f24af00b190e546/3387bc26-8a75-4bf8-ae73-434974665275/glg-arrow-green.png" width="50" style="display: block; width: 50px; max-width: 50px;" /></a>
 					</td>
 					<td class="name-block" style="vertical-align: top;">
-						<p style="margin: 0; line-height: 1.4;"><span id="signatureName">Firstname Lastname</span></p>
+						<p style="margin: 10px 0 0 0; font-weight: bold; font-size: 12pt;"><span id="signatureName">Firstname Lastname</span></p>
 						
-							<p style="margin: 0; line-height: 1.4;">2027 Dodge Street, Suite 204<br />Omaha, Nebraska 68102</p>
-							  <p style="margin: 0; line-height: 1.4;"><span id="signaturePhone1">555-555-5555</span> | <a href="https://glg.law" target="_blank" style="color: inherit;">glg.law</a></p>
+							<span style="color: #777;">
+							<p style="margin: 0;"><span id="line2">Line 2 text goes here</span></p>
+							
+							<p style="margin: 0;">2027 Dodge Street, Suite 204<br />Omaha, Nebraska 68102</p>
+							
+							<p style="margin: 0;"><span id="signaturePhone1">555-555-5555</span> | <a href="https://glg.law" target="_blank" style="color: inherit;">glg.law</a></p>
+							</span>
 					</td>
 				</tr>
 
@@ -130,6 +140,7 @@
   <script>
     	var personLogo = document.getElementById('signatureLogo');
 		var personName = document.getElementById('signatureName');
+		var personLine2 = document.getElementById('line2');
 		var personPhones = document.getElementById('signaturePhoneNumbers');
 		var personPhone1 = document.getElementById('signaturePhone1');
 		
@@ -138,6 +149,7 @@
 	  function getUserInfo() {
 		  var logoField = document.getElementById('logoField').value;
 		  var nameField = document.getElementById('nameField').value;
+		  var line2Field = document.getElementById('line2Field').value;
 		  var phone1Field = document.getElementById('phone1Field').value;
 		  
 		  var result = document.getElementById('result');
@@ -162,6 +174,7 @@
 		  } else {
 			 if (personLogo) { getLogo(logoField); };
 			 if (nameField) { personName.innerHTML = nameField; };
+			 if (personLine2) { personLine2.innerHTML = line2Field; };
 			 personPhone1.innerHTML = phone1Field;			
 						  
 		  }
